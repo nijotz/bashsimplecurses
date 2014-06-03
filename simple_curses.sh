@@ -133,10 +133,18 @@ window(){
     tput cuf $left
     #set title color
     case $color in
-        green) green ;;
-        red) red ;;
-        blue) blue ;;
-        grey|*) grey ;;
+        green)
+            tput setaf 2
+            ;;
+        red)
+            tput setaf 1
+            ;;
+        blue)
+            tput setaf 4
+            ;;
+        grey|*)
+            tput setaf 0
+            ;;
     esac
     
     
@@ -144,7 +152,7 @@ window(){
     tput rc
     tput cuf $((cols-1))
     echo -ne $_VLINE
-    echo -n -e "\e[00m"
+    tput sgr0
     _nl
     #then draw bottom line for title
     addsep
@@ -169,18 +177,6 @@ clean_line(){
     #tput el
     tput rc
     
-}
-green() {
-   echo -n -e "\E[01;32m"
-}
-red() {
-   echo -n -e "\E[01;31m"
-}
-blue() {
-   echo -n -e "\E[01;34m"
-}
-grey() {
-   echo -n -e "\E[01;37m"
 }
 
 #add text on current window
